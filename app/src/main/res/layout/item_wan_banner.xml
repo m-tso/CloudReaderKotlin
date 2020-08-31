@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class="WanBannerBinding">
+
+    </data>
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.stx.xhb.xbanner.XBanner
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/xbanner"
+            android:layout_width="match_parent"
+            android:layout_height="129dp"
+            app:AutoPlayTime="3000"
+            app:clipChildrenLeftRightMargin="85dp"
+            app:pageChangeDuration="800"
+            app:pointSelect="@drawable/wan_banner_select"
+            app:pointNormal="@drawable/wan_banner_unselect"
+            app:isClipChildrenMode="true"
+            app:isHandLoop="true"
+            app:isAutoPlay="true"
+            app:clipChildrenTopBottomMargin="0dp"/>
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/banner"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="17dp"
+                android:background="@color/colorTheme" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rb_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:button="@null"
+                android:checked="true"
+                android:padding="10dp"
+                android:text="最新博文"
+                android:textColor="@color/select_home_text" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:background="@color/colorHomeLine" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rb_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:button="@null"
+                android:padding="10dp"
+                android:text="最新项目"
+                android:textColor="@color/select_home_text" />
+        </RadioGroup>
+
+    </LinearLayout>
+</layout>

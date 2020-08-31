@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data class="MainNavBinding">
+
+    </data>
+
+<RelativeLayout
+    android:id="@+id/nav_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/ic_nav_bg_drawerlayout">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/kanai"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="35dp"/>
+
+        <TextView
+            android:id="@+id/tv_nav_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="玩安卓"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            />
+    </LinearLayout>
+
+    <include layout="@layout/nav_main_content" android:id="@+id/nav_main_content" />
+
+</RelativeLayout>
+</layout>

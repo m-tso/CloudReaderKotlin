@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="SearchBinding">
+
+    </data>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/search_status_bar_background"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/search_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorTheme">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_search_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_back" />
+
+                <EditText
+                    android:id="@+id/edt_search_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="40dp"
+                    android:layout_height="47dp"
+                    android:imeOptions="actionSearch"
+                    android:hint="输入搜索内容"
+                    android:background="@drawable/shape_edit_line"
+                    android:textColor="#bbffffff"
+                    android:textColorHint="#77ffffff"
+                    android:textCursorDrawable="@drawable/shape_edit_cursor"
+                    android:textSize="17sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="15dp"
+                    android:singleLine="true"
+                    android:paddingRight="38dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_clear_words"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/delete"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_search"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:background="@color/colorTheme"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/colorWhite"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorWhite"
+            app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+            app:tabTextColor="@color/colorWhiteHalf">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="玩安卓"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="干货 | 安卓"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="干货 | 全部"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="网页"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.example.cloudreaderkotloin.base.XRecyclerView
+                android:id="@+id/rv_search_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+               />
+
+            <LinearLayout
+                android:id="@+id/llt_hot_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+                <TextView
+                    android:id="@+id/tv_hot_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="热门搜索"
+                    android:textColor="@color/colorTabText"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.internal.FlowLayout
+                    android:id="@+id/flt_hot_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginEnd="10dp"
+                    app:itemSpacing="8dp"
+                    app:lineSpacing="8dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_search_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                       android:layout_centerVertical="true"
+                        android:text="历史搜索"
+                        android:textColor="@color/colorTabText"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_margin="15dp"/>
+
+
+                    <ImageView
+                        android:id="@+id/iv_history_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_history_delete"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:padding="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"/>
+
+                </RelativeLayout>
+
+
+                <com.google.android.material.internal.FlowLayout
+                    android:id="@+id/flt_search_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:itemSpacing="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title1"
+                    app:lineSpacing="8dp" />
+
+            </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+</layout>

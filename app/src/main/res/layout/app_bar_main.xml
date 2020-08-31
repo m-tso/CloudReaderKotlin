@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/toolbar"
+    >
+    <View
+        android:id="@+id/status_bar_background"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorTheme">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:tag="aa"
+                    android:id="@+id/nav_menu"
+                    android:layout_width="23dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/titlebar_menu" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:id="@+id/title_one"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/titlebar_music" />
+                <ImageView
+                    android:id="@+id/title_two"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/titlebar_friends" />
+                <ImageView
+                    android:id="@+id/title_three"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/titlebar_disco" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/article_search"
+                android:src="@drawable/actionbar_search"
+                android:layout_width="23dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="25dp"/>
+
+        </RelativeLayout>
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+   <fragment
+       android:id="@+id/fragment_wan"
+       class="com.example.cloudreaderkotloin.bussiness.home.wan.fragment.WanFragment"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
+
+</LinearLayout>
+</layout>

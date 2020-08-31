@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+   <data class="WanMainBinding">
+
+   </data>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+       android:id="@+id/srl_wan"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+      <com.example.cloudreaderkotloin.base.XRecyclerView
+          android:id="@+id/rv_wan"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+
+   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:id="@+id/lltips"
+       android:visibility="gone">
+
+      <ImageView
+          android:layout_width="300dp"
+          android:layout_height="200dp"
+          android:src="@drawable/connect_error"
+          android:layout_gravity="center"
+          android:layout_marginTop="190dp"/>
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          android:text="网络未连接哟！客官可以下拉刷新！"
+          android:gravity="center"
+          android:layout_marginTop="40dp"
+          android:textSize="15sp"/>
+   </LinearLayout>
+
+</RelativeLayout>
+</layout>
