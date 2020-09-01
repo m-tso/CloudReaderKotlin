@@ -14,7 +14,7 @@ import com.example.cloudreaderkotloin.bussiness.common.bean.NetWorkDataLoadState
  * @Author: tso 2020/8/29 14:43
  */
 abstract class NetWorkActivity<VM : NetWorkViewModel> : BaseActivity<VM>(), NetChangeListener {
-    //网络加载状态类
+    //网络加载状态类，该属性当前设计并不完美，后面可能去除
     var loadState: MutableLiveData<NetWorkDataLoadState>? = null
     //监听网络变化
     private var netBroadcastReceiver: NetBroadcastReceiver? = null

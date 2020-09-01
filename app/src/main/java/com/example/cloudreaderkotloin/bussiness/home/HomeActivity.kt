@@ -52,7 +52,7 @@ class HomeActivity(override val contentViewId: Int = R.layout.activity_home) :
 
     }
 
-    fun dealDrawerClick(viewId: Int) {
+    private fun dealDrawerClick(viewId: Int) {
         drawer.closeDrawer(GravityCompat.START)
         val runnable = {
             when (viewId) {
