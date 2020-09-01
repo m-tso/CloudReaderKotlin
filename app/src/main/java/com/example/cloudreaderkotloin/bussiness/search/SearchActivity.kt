@@ -61,14 +61,11 @@ class SearchActivity(override val contentViewId: Int = R.layout.activity_search)
         rv_search_result.setRecycledViewPool(pool);
         img_search_back.setOnClickListener { finish() }
 
-        rv_search_result.loadMoreListener = object : XRecyclerView.LoadMoreListener {
-            override fun onStartLoadMore(loadMoreView: View) {
-                viewModel?.getWanArticleByWords(searchPage, searchWord, SearchType.SearchSameWord())
-                searchPage++
-            }
-
-            override fun onLoadMoreFinish(loadMoreView: View) {}
+        rv_search_result.onStartLoadMoreListener = {
+            viewModel?.getWanArticleByWords(searchPage, searchWord, SearchType.SearchSameWord())
+            searchPage++
         }
+
 
         edt_search_content.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

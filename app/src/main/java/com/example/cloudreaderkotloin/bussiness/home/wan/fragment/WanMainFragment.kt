@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cloudreaderkotloin.R
 import com.example.cloudreaderkotloin.base.NetWorkFragment
-import com.example.cloudreaderkotloin.base.XRecyclerView.LoadMoreListener
 import com.example.cloudreaderkotloin.bussiness.common.bean.NetWorkDataLoadState
 import com.example.cloudreaderkotloin.bussiness.common.utils.addArticle2Collections
 import com.example.cloudreaderkotloin.bussiness.common.utils.checkConnectIsAvailable
@@ -50,17 +49,10 @@ class WanMainFragment(override val resId: Int = R.layout.fragment_wan_main) :
         rv_wan.setXRvAdapter(rvWanAdapter!!)
         rv_wan.openLoadMoreView()
 
-        rv_wan.loadMoreListener = object : LoadMoreListener {
-            override fun onStartLoadMore(v: View) {
-                v.visibility = if (checkConnectIsAvailable()) View.VISIBLE else View.GONE
-
-                if (checkConnectIsAvailable() && wanMainData?.value != null){
-                    rvWanAdapter?.loadNewPageArticles()
-                }
-            }
-
-            override fun onLoadMoreFinish(loadMoreView: View) {
-
+        rv_wan.onStartLoadMoreListener = {
+            it.visibility = if (checkConnectIsAvailable()) View.VISIBLE else View.GONE
+            if (checkConnectIsAvailable() && wanMainData?.value != null){
+                rvWanAdapter?.loadNewPageArticles()
             }
         }
 

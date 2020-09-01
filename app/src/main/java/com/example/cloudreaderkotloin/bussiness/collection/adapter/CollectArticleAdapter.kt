@@ -117,7 +117,7 @@ class CollectArticleAdapter : XRvAdapter<BindingViewHolder<*>> {
 
 private fun addArticle(article: List<CollectArticle>) {
     if(article.isEmpty()){
-        mRecyclerView.tagNoMore(XRecyclerView.LoadMoreType.NoMore)
+        mRecyclerView.tagNoMore()
         return
     }
 

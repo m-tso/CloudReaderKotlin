@@ -112,7 +112,7 @@ class WanArticleAdapter : XRvAdapter<BindingViewHolder<*>> {
 
     private fun addArticle(article: List<Article>) {
         if(article.isEmpty()){
-            mRecyclerView.tagNoMore(XRecyclerView.LoadMoreType.NoMore)
+            mRecyclerView.tagNoMore()
             return
         }
         mRecyclerView.stopLoadMore()

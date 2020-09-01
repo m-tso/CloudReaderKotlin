@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.cloudreaderkotloin.R
+import java.lang.Exception
 
 /**
  * @Description: 封装recyclerview
@@ -28,9 +29,11 @@ class XRecyclerView : RecyclerView {
     private var mIsOpenLoadMoreMode = false
     val mViewData = ObservableArrayList<Any>()
 
-    var loadMoreListener: LoadMoreListener? = null
     var mAdapter: WrapAdapter? = null
 
+    var onStartLoadMoreListener: ((View) -> Unit) ? = null
+    var onLoadMoreFinishListener: ((View) -> Unit) ? = null
+    var onNoMoreDataListener: ((View) -> Unit) ? = null
 
 
     constructor(context: Context) : super(context)
@@ -102,8 +105,15 @@ class XRecyclerView : RecyclerView {
         mIsOpenLoadMoreMode = true
     }
 
-    fun tagNoMore(type: LoadMoreType) {
-        setLoadMoreType(type)
+    /**
+     * @Description: 标记无更多数据，默认情况下会recyclerview最下方item显示为“没有更多数据了”
+     * @Author: tso 2020/9/1 14:00
+     */
+    fun tagNoMore() {
+        if ( mLoadMoreLayoutId == R.layout.view_load_more ) {
+            setLoadMoreType(LoadMoreType.NoMore)
+        }
+        mBloadMoreView?.let { onNoMoreDataListener?.let { it1 -> it1(it) } }
     }
 
     private fun setLoadMoreType(type: LoadMoreType) {
@@ -111,7 +121,6 @@ class XRecyclerView : RecyclerView {
         val textView = mBloadMoreView?.findViewById<TextView>(R.id.tv_no_more_tag)
         val drawableAnimation = mBloadMoreView?.findViewById<ImageView>(R.id.loadmore_animation)
 
-        if (mLoadMoreLayoutId == R.layout.view_load_more) {
             when(type){
                 is LoadMoreType.Loading -> {
                     textView?.visibility = View.GONE
@@ -132,20 +141,21 @@ class XRecyclerView : RecyclerView {
                 }
             }
 
-        }
-
-
     }
 
 
+    /**
+     * @Description: 开始加载更多，该方法有recyclerview自行调用，使用者可以通过暴露的LoadMoreListener来添加
+     *               自己的代码
+     * @Author: tso 2020/9/1 14:00
+     */
     private fun startLoadMore() {
-        (mBloadMoreView?.findViewById<ImageView>(R.id.loadmore_animation)?.drawable
-                as AnimationDrawable).start()
-        setLoadMoreType(LoadMoreType.Loading)
-
-        loadMoreListener?.onStartLoadMore(mBloadMoreView!!)
-
-
+        if (mLoadMoreLayoutId == R.layout.view_load_more ) {
+            (mBloadMoreView?.findViewById<ImageView>(R.id.loadmore_animation)?.drawable
+                    as AnimationDrawable).start()
+            setLoadMoreType(LoadMoreType.Loading)
+        }
+        onStartLoadMoreListener?.let { mBloadMoreView?.let { it1 -> it(it1) } }
     }
 
     /**
@@ -153,21 +163,19 @@ class XRecyclerView : RecyclerView {
      * @Author: tso 2020/8/11 10:44
      */
 
-    fun stopLoadMore() {
-        (mBloadMoreView?.findViewById<ImageView>(R.id.loadmore_animation)?.drawable
-                as AnimationDrawable).stop()
-//        mBloadMoreView?.visibility = View.GONE
-        setLoadMoreType(LoadMoreType.Finish)
+    fun stopLoadMore(rewriteBlock: ((View) -> Unit)? = null) {
 
+        if (rewriteBlock == null && mLoadMoreLayoutId == R.layout.view_load_more ) {
+            (mBloadMoreView?.findViewById<ImageView>(R.id.loadmore_animation)?.drawable
+                    as AnimationDrawable).stop()
 
-        mBloadMoreView?.let { loadMoreListener?.onLoadMoreFinish(it) }
+            setLoadMoreType(LoadMoreType.Finish)
+        }
+
+        onLoadMoreFinishListener?.let { mBloadMoreView?.let { it1 -> it(it1) } }
 
     }
 
-    open interface LoadMoreListener {
-        fun onStartLoadMore(loadMoreView: View)
-        fun onLoadMoreFinish(loadMoreView: View)
-    }
 
 
     fun setXRvAdapter(adapter: XRvAdapter<*>) {
@@ -268,5 +276,7 @@ class XRecyclerView : RecyclerView {
             }
         }
     }
+
+
 
 }

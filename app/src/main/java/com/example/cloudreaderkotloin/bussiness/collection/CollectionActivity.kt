@@ -48,16 +48,11 @@ class CollectionActivity(override val contentViewId: Int = R.layout.activity_col
         rv_collection.layoutManager = WrapContentLinearLayoutManager(this)
         rv_collection.setXRvAdapter(CollectArticleAdapter(this,viewModel!!))
         rv_collection.openLoadMoreView()
-        rv_collection.loadMoreListener = object : XRecyclerView.LoadMoreListener{
-            override fun onStartLoadMore(loadMoreView: View) {
-                viewModel?.getCollectionByPage(LoadType.LoadMore())
-            }
-
-            override fun onLoadMoreFinish(loadMoreView: View) {
-
-            }
-
+        rv_collection.onStartLoadMoreListener = {
+            viewModel?.getCollectionByPage(LoadType.LoadMore())
         }
+
+
 
         viewModel?.getCollectionByPage(LoadType.LoadFirstPage(showSrlTag))
 
