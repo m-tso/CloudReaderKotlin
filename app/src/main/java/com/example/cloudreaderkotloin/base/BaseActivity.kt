@@ -2,6 +2,7 @@ package com.example.cloudreaderkotloin.base
 
 import android.app.ActivityManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowManager
@@ -106,6 +107,12 @@ open abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
             if (className == cpn!!.className) return true
         }
         return false
+    }
+
+    inline fun <reified T : AppCompatActivity> AppCompatActivity.startBaseActivity(bundle: Bundle = Bundle()) {
+        val intent = Intent(this, T::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 
 

@@ -37,15 +37,6 @@ class SearchActivity(override val contentViewId: Int = R.layout.activity_search)
     private val pool = RecyclerView.RecycledViewPool()
     private var ldHistory: MutableLiveData<ArrayList<String>>? = null
 
-
-
-    companion object {
-        fun start(context: Context) {
-            val intent = Intent(context, SearchActivity::class.java)
-            context.startActivity(intent)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         flowStatusBar(resources.getColor(R.color.colorTheme), search_status_bar_background)

@@ -1,14 +1,11 @@
 package com.example.cloudreaderkotloin.bussiness.home
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import com.example.cloudreaderkotloin.R
 import com.example.cloudreaderkotloin.base.NetWorkActivity
 import com.example.cloudreaderkotloin.bussiness.collection.CollectionActivity
@@ -48,7 +45,7 @@ class HomeActivity(override val contentViewId: Int = R.layout.activity_home) :
                     .text = getString(USER_NAME)
             }
         }
-        article_search.setOnClickListener { SearchActivity.start(this) }
+        article_search.setOnClickListener { startBaseActivity<SearchActivity>() }
 
     }
 
@@ -58,11 +55,10 @@ class HomeActivity(override val contentViewId: Int = R.layout.activity_home) :
             when (viewId) {
                 R.id.ll_nav_collections -> {
                     val intent = if (!isLogin()) {
-                        Intent(this, LoginActivity::class.java)
+                        startBaseActivity<LoginActivity>()
                     } else {
-                        Intent(this, CollectionActivity::class.java)
+                        startBaseActivity<CollectionActivity>()
                     }
-                    startActivity(intent)
                 }
 
 
@@ -77,7 +73,7 @@ class HomeActivity(override val contentViewId: Int = R.layout.activity_home) :
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onLoginSuccess(success: LoginEvent) {
         if (success.success) {
-            startActivity(Intent(this, CollectionActivity::class.java))
+            startBaseActivity<CollectionActivity>()
         }
 
     }

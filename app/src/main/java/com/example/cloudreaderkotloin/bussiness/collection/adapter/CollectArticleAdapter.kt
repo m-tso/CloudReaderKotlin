@@ -110,6 +110,7 @@ class CollectArticleAdapter : XRvAdapter<BindingViewHolder<*>> {
         mRecyclerView.mAdapter?.notifyDataSetChanged()
 
 
+
     }
 
 
