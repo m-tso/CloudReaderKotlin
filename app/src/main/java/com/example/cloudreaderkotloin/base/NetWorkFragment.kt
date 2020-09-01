@@ -10,6 +10,10 @@ import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 
+/**
+ * @Description: 网络相关的Fragment的基类，提供网络变化和数据加载的相关接口
+ * @Author: tso 2020/8/31 14:28
+ */
 abstract class NetWorkFragment<VM:ViewModel,VDB: ViewDataBinding> : BaseFragment<VM, VDB>(),
     NetBroadcastReceiver.NetChangeListener {
     var listener: NetBroadcastReceiver.NetChangeListener? = null

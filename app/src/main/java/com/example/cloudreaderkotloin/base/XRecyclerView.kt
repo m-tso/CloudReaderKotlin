@@ -16,7 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.cloudreaderkotloin.R
 
-
+/**
+ * @Description: 封装recyclerview
+ * @Author: tso 2020/8/31 14:46
+ */
 class XRecyclerView : RecyclerView {
 
     var mBloadMoreView: View? = null
@@ -37,6 +40,8 @@ class XRecyclerView : RecyclerView {
         attributeSet,
         defStyleAttr
     )
+
+
 
     override fun onScrollStateChanged(newState: Int) {
         super.onScrollStateChanged(newState)
@@ -72,7 +77,7 @@ class XRecyclerView : RecyclerView {
             }
 
             //时判断界面显示的最后item的position是否等于itemCount总数-1也就是最后一个item的position
-            //如果相等则说明已经滑动到最后了
+            //如果相等则说明已经滑动到最后了。如果所有的item不足一页，那也不用显示加载更多了
             if (lastPosition == getLayoutManager()!!.itemCount - 1
                 && mViewData.size != 0 && firstPosition != 0
             ) {
@@ -164,6 +169,7 @@ class XRecyclerView : RecyclerView {
         fun onLoadMoreFinish(loadMoreView: View)
     }
 
+
     fun setXRvAdapter(adapter: XRvAdapter<*>) {
         adapter.mRecyclerView = this
         mAdapter = WrapAdapter(adapter)
@@ -211,6 +217,10 @@ class XRecyclerView : RecyclerView {
         })
     }
 
+    /**
+     * @Description: “加载更多”状态的封装类，Loading：加载中，Finish：加载完成 NoMore：无更多数据
+     * @Author: tso 2020/8/31 15:21
+     */
     sealed class LoadMoreType{
         object Loading : LoadMoreType()
         object Finish : LoadMoreType()

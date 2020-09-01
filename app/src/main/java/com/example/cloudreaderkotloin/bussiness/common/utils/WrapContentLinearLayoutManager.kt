@@ -7,6 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.IndexOutOfBoundsException
 
+/**
+ * @Description: 用于解决recyclerview自带的bug，可以用该类代替LinearLayout
+ * @Author: tso 2020/9/1 9:15
+ */
+
 class WrapContentLinearLayoutManager : LinearLayoutManager {
 
     constructor(context: Context?) : super(context)

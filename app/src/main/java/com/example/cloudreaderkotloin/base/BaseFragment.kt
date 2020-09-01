@@ -11,6 +11,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.reflect.ParameterizedType
 
+
+/**
+ * @Description: fragment基类，封装ViewModel和ViewDataBinding
+ * @Author: tso 2020/8/31 14:19
+ */
 open abstract class BaseFragment<VM: ViewModel,VDB: ViewDataBinding> : Fragment() {
     lateinit var binding: VDB
      var viewModel: VM ?= null

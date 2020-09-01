@@ -31,9 +31,10 @@ open abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     }
 
-    /**
-     * 初始化viewmodel
-     */
+   /**
+    * @Description: 初始化ViewModel
+    * @Author: tso 2020/8/31 14:14
+    */
     private fun initViewModel() {
         if (viewModel != null) return;
         var clzz: Class<VM>
@@ -47,6 +48,11 @@ open abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         }
     }
 
+    /**
+     * @Description: 反射初始化LoadState，后通过封装NetWorkActivity,该方法已被弃用
+     * @Author: tso 2020/8/31 14:15
+     */
+
     private fun initLoadState() {
         val kClass = viewModel?.javaClass?.kotlin
         kClass?.memberProperties?.forEach {
@@ -55,9 +61,6 @@ open abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
             }
         }
     }
-
-
-
 
 
     private fun getGenericClass(property: KProperty1<*, *>): Boolean {
@@ -77,16 +80,18 @@ open abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
 
     /**
-     * 判断某个界面是否在前台
+     * @Description: 判断某个界面是否在前台
+     * @Author: tso 2020/8/31 14:18
      * @return 是否在前台显示
      */
     fun isForeground(): Boolean {
         return isForeground(this, this.javaClass.name)
     }
 
+
     /**
-     * 判断某个界面是否在前台
-     *
+     * @Description: 判断某个界面是否在前台
+     * @Author: tso 2020/8/31 14:17
      * @param context   Context
      * @param className 界面的类名
      * @return 是否在前台显示
