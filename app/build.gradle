@@ -82,11 +82,17 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-    implementation 'com.android.support:percent:29.0.0'
-
     implementation 'com.github.youlookwhat:WebProgress:1.2.0'
 
     implementation 'org.greenrobot:eventbus:3.1.1'
+
+    def paging_version = "3.0.0-alpha03"
+
+    //paging3依赖
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    testImplementation "androidx.paging:paging-common:$paging_version"
+    implementation "androidx.paging:paging-guava:$paging_version"
+
 
 
 

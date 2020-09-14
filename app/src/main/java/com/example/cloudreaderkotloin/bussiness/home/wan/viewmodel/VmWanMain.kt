@@ -1,14 +1,20 @@
 package com.example.cloudreaderkotloin.bussiness.home.wan.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.example.cloudreaderkotloin.base.NetWorkViewModel
 import com.example.cloudreaderkotloin.bussiness.common.bean.NetWorkDataLoadState
 import com.example.cloudreaderkotloin.bussiness.common.utils.handelConnectExecption
 import com.example.cloudreaderkotloin.bussiness.home.wan.bean.Article
 import com.example.cloudreaderkotloin.bussiness.home.wan.bean.WanBanner
+import com.example.cloudreaderkotloin.bussiness.home.wan.model.paging.WanArticleSource
 import com.example.cloudreaderkotloin.bussiness.home.wan.model.retrofit.RetrofitManager
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 
 
 class VmWanMain : NetWorkViewModel() {
@@ -21,7 +27,13 @@ class VmWanMain : NetWorkViewModel() {
     private val TAG = "VmWanMain"
     private val wanMainApi = RetrofitManager.wanApiService
 
-    val ADD_ARTICLE = 1020
+    //玩安卓的页数据，每次返回的value都是一页的数据
+    val pageData =
+        Pager(PagingConfig(pageSize = 100,initialLoadSize = 500,prefetchDistance = 500)){
+        WanArticleSource()
+    }.flow.asLiveData()
+
+
 
 
     /**
@@ -34,10 +46,8 @@ class VmWanMain : NetWorkViewModel() {
         viewModelScope.launch(handelConnectExecption(ldLoadState)) {
 
             ldLoadState.value = NetWorkDataLoadState.Loading()
-            val articleResponse = async { wanMainApi.getArticles(0) }
-            val bannerResponse = async { wanMainApi.getBanner() }
-            val bannerRequestData = withTimeoutOrNull(5000L) { bannerResponse.await() }
-            val articleRequestData = withTimeoutOrNull(5000L) { articleResponse.await() }
+            val bannerRequestData = withTimeoutOrNull(5000L) { wanMainApi.getBanner() }
+            val articleRequestData = withTimeoutOrNull(5000L) { wanMainApi.getArticles(0) }
 
 
             if (articleRequestData == null || bannerRequestData == null) {
@@ -67,8 +77,7 @@ class VmWanMain : NetWorkViewModel() {
      */
     fun loadArticleByPage(page: Int) {
         viewModelScope.launch(handelConnectExecption(ldLoadState)) {
-            val articleResponse = async { wanMainApi.getArticles(page) }
-            val articleRequestData = articleResponse.await()
+            val articleRequestData = wanMainApi.getArticles(page)
             if (articleRequestData.data.datas != null) {
                 //延迟1s，让加载动画能够给用户看到
                 delay(1000)

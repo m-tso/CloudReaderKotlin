@@ -17,7 +17,7 @@ class VmLogin : NetWorkViewModel() {
 
     fun login(username: String,password: String){
         viewModelScope.launch(handelConnectExecption(ldLoadState)){
-            val loginResp = async { wanApi.login(username,password) }.await()
+            val loginResp =  wanApi.login(username,password)
             if (loginResp.data != null){
                 loginResp.data.password = password
                 ldLoginResult.value = loginResp.data

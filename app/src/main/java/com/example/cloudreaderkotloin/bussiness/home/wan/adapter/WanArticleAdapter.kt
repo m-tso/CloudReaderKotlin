@@ -1,8 +1,6 @@
 package com.example.cloudreaderkotloin.bussiness.home.wan.adapter
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -11,15 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
 import com.example.cloudreaderkotloin.R
 import com.example.cloudreaderkotloin.base.BindingViewHolder
-import com.example.cloudreaderkotloin.base.XRecyclerView
 import com.example.cloudreaderkotloin.base.XRvAdapter
-import com.example.cloudreaderkotloin.bussiness.common.utils.addArticle2Collections
-import com.example.cloudreaderkotloin.bussiness.common.utils.cancleCollect
-import com.example.cloudreaderkotloin.bussiness.common.utils.checkConnectIsAvailable
-import com.example.cloudreaderkotloin.bussiness.common.utils.isLogin
+import com.example.cloudreaderkotloin.bussiness.common.utils.*
 import com.example.cloudreaderkotloin.bussiness.home.wan.activity.ArticleDetailActivity
 import com.example.cloudreaderkotloin.bussiness.home.wan.activity.LoginActivity
 import com.example.cloudreaderkotloin.bussiness.home.wan.bean.Article
@@ -76,20 +69,20 @@ class WanArticleAdapter : XRvAdapter<BindingViewHolder<*>> {
             bundle.putString("link",article.link)
             bundle.putString("title",article.title)
             if (lifecycleOwner is AppCompatActivity) {
-                ArticleDetailActivity.start(lifecycleOwner as AppCompatActivity, bundle)
+                (lifecycleOwner as AppCompatActivity)
+                    .startMyActivity<ArticleDetailActivity>(bundle)
+
             } else if (lifecycleOwner is Fragment) {
-                ArticleDetailActivity.start(
-                    ((lifecycleOwner as Fragment).context) as AppCompatActivity,
-                    bundle
-                )
+                (lifecycleOwner as Fragment).startMyActivity<ArticleDetailActivity>(bundle)
             }
         }
 
         binding.ivAddCollection.setOnClickListener {
             if (!isLogin()){
-                val intent = Intent((lifecycleOwner as Fragment).activity, LoginActivity::class.java)
-                intent.putExtra("articleId",article.id)
-                (lifecycleOwner as Fragment).activity?.startActivity(intent)
+                val bundle = Bundle()
+                bundle.putInt("articleId",article.id)
+                (lifecycleOwner as AppCompatActivity).startMyActivity<LoginActivity>(bundle)
+
                 return@setOnClickListener
             }
 

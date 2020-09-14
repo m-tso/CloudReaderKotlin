@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -117,7 +116,8 @@ class WanBannerArticleAdapter : XRvAdapter<BindingViewHolder<*>> {
                 val bundle = Bundle()
                 bundle.putString("link",article.link)
                 bundle.putString("title",article.title)
-                ArticleDetailActivity.start(fragment.activity as AppCompatActivity,bundle)
+
+                fragment.startMyActivity<ArticleDetailActivity>(bundle)
 
                 Log.i("articleid",article.id.toString())
                 Log.i("articleid",article.collect.toString())

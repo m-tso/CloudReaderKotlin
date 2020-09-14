@@ -16,6 +16,7 @@ const val ARTICLE_COLLECTION = "article_collection"
 const val WAN = "wan"
 const val WAN_DOMAIN = "www.wanandroid.com"
 
+
 val gson = Gson()
 
 fun getSharePreferenceInstance(): SharedPreferences {
@@ -34,15 +35,28 @@ fun createCookieSharePreference(){
 fun getCookieSharePreferenece(key: String): String? {
     val sharedPreferences = MyApplication.getContext().getSharedPreferences(COOKIE, MODE_PRIVATE)
     return sharedPreferences.getString(key,"")
+
 }
 
 
+/**
+ * @Description:保存一般字符串。<note>保存密码时请勿使用该方法
+ * @Author: tso 2020/9/10 9:52
+ */
 
 fun saveString(key: String, data: String) {
     val sharedPreferencesEditor = getSharePreferenceInstance().edit()
     sharedPreferencesEditor.putString(key, data)
     sharedPreferencesEditor.apply()
 }
+
+
+
+
+/**
+ * @Description: 获取一般的字符串。<note>获取密码时请勿使用该方法
+ * @Author: tso 2020/9/10 9:53
+ */
 
 fun getString(key: String): String? {
     return getSharePreferenceInstance().getString(key, "")
@@ -82,9 +96,8 @@ fun clearData(key: String) {
 }
 
 fun isLogin(): Boolean{
-    val userName = getString(USER_NAME)
-    val password = getString(PASSWORD)
-    if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(PASSWORD)){
+
+    if (!TextUtils.isEmpty(getString(USER_NAME)) && !TextUtils.isEmpty(getString(PASSWORD))){
         return true
     }
 

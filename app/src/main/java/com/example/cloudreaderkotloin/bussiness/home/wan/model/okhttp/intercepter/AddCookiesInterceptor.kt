@@ -1,16 +1,14 @@
 package com.example.cloudreaderkotloin.bussiness.home.wan.model.okhttp.intercepter
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.text.TextUtils
-import android.util.Log
 import com.example.cloudreaderkotloin.bussiness.common.utils.*
 import okhttp3.Interceptor
 import okhttp3.Response
 
 
 class AddCookiesInterceptor : Interceptor {
-    private lateinit var context: Context
+    private var context: Context
     constructor(_context: Context){
         context = _context
     }
@@ -29,6 +27,7 @@ class AddCookiesInterceptor : Interceptor {
                 builder.addHeader("Cookie","loginUserPassword=$password")
             }
         }
+
 
         return chain.proceed(builder.build())
     }

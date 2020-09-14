@@ -31,16 +31,6 @@ class ArticleDetailActivity(override val contentViewId: Int = R.layout.activity_
     private var articleLink: String? = null
     private var articleTile: String? = null
 
-    companion object{
-        fun start(from: AppCompatActivity,bundle: Bundle? = null){
-            val intent = Intent(from,
-                ArticleDetailActivity::class.java)
-            if (bundle != null) { intent.putExtras(bundle) }
-            from.startActivity(intent)
-        }
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detail_content.fitsSystemWindows = false

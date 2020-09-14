@@ -23,7 +23,8 @@ object RetrofitManager {
         val okHttpClient =
             OkHttpClient.Builder().connectTimeout(connetTimeOut, TimeUnit.MILLISECONDS)
                 .addInterceptor(SaveCookiesInterceptor(MyApplication.getContext()))
-                .addInterceptor(AddCookiesInterceptor(MyApplication.getContext())).build()
+                .addInterceptor(AddCookiesInterceptor(MyApplication.getContext()))
+                .build()
 
         mRetrofit = Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())

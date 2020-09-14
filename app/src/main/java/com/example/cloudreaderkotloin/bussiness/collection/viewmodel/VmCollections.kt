@@ -27,7 +27,7 @@ class VmCollections : NetWorkViewModel() {
 
         viewModelScope.launch(handelConnectExecption(ldLoadState)) {
             ldLoadState.value = NetWorkDataLoadState.Loading(loadType.msg)
-            val collectionsResp = async { wanApi.getCollectArticles(page) }.await()
+            val collectionsResp = wanApi.getCollectArticles(page)
             val collectArticles = collectionsResp.data.datas
 
             if (collectArticles != null) {

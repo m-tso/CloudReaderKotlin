@@ -11,7 +11,7 @@
        android:id="@+id/srl_wan"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
-      <com.example.cloudreaderkotloin.base.XRecyclerView
+      <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rv_wan"
           android:layout_width="match_parent"
           android:layout_height="match_parent"/>

@@ -45,7 +45,7 @@ class HomeActivity(override val contentViewId: Int = R.layout.activity_home) :
                     .text = getString(USER_NAME)
             }
         }
-        article_search.setOnClickListener { startBaseActivity<SearchActivity>() }
+        article_search.setOnClickListener { startMyActivity<SearchActivity>() }
 
     }
 
@@ -55,9 +55,9 @@ class HomeActivity(override val contentViewId: Int = R.layout.activity_home) :
             when (viewId) {
                 R.id.ll_nav_collections -> {
                     val intent = if (!isLogin()) {
-                        startBaseActivity<LoginActivity>()
+                        startMyActivity<LoginActivity>()
                     } else {
-                        startBaseActivity<CollectionActivity>()
+                        startMyActivity<CollectionActivity>()
                     }
                 }
 
@@ -73,7 +73,7 @@ class HomeActivity(override val contentViewId: Int = R.layout.activity_home) :
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onLoginSuccess(success: LoginEvent) {
         if (success.success) {
-            startBaseActivity<CollectionActivity>()
+            startMyActivity<CollectionActivity>()
         }
 
     }

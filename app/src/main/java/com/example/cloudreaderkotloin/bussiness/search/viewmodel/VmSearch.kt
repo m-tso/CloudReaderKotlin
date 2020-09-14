@@ -39,8 +39,7 @@ class VmSearch : NetWorkViewModel() {
     fun refreshHotSearchWords() {
 
         viewModelScope.launch(handelConnectExecption(loadState)) {
-            val wanHotSearchWordRequestData =
-                async { wanApiService.getHotSearchWords() }.await()
+            val wanHotSearchWordRequestData = wanApiService.getHotSearchWords()
             val wanHotSearchWord = wanHotSearchWordRequestData.data
 
             if (wanHotSearchWord != null) {
@@ -62,7 +61,7 @@ class VmSearch : NetWorkViewModel() {
         searchWord = words
         viewModelScope.launch(handelConnectExecption(loadState)) {
             val wanSearchRequestData =
-                async { wanApiService.getSearchArticles(page, words) }.await()
+                wanApiService.getSearchArticles(page, words)
 
             val articles = wanSearchRequestData.data.datas
             val wanSearchData = WanSearchData()

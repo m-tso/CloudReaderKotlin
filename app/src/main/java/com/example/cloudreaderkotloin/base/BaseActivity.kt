@@ -109,11 +109,6 @@ open abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         return false
     }
 
-    inline fun <reified T : AppCompatActivity> AppCompatActivity.startBaseActivity(bundle: Bundle = Bundle()) {
-        val intent = Intent(this, T::class.java)
-        intent.putExtras(bundle)
-        startActivity(intent)
-    }
 
 
 }
